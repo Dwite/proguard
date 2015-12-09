@@ -37,11 +37,7 @@ class Proguard extends Controller {
   }
 
   def getListOfFiles(dir: File): List[File] = {
-    val files = dir.listFiles
-    if (files == null)
-      List.empty
-    else
-      files.toList
+    dir.listFiles.toList
   }
 
   def readFile(string: String): String = {
