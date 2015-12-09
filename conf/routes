@@ -10,4 +10,7 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 
 
 # Proguard generator
-GET     /proguard/:libs             controllers.Application.proguard(libs : String)
+GET     /api/list/:libs             controllers.Proguard.proguard(libs : String)
+
+# Proguard list of files
+GET     /api/list                   controllers.Proguard.list()
