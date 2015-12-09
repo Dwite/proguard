@@ -14,6 +14,7 @@ import play.api.mvc.{Action, Controller}
 class Proguard extends Controller {
 
   val proguardFolder = "/public/proguards/"
+  val proguardFolderFix = "/public/proguards"
   val proguardSuffix = "proguard-"
   val proguardExtension = ".pro"
   val title = "# Created by https://www.proguard.io/api/%s\n\n%s"
@@ -21,7 +22,7 @@ class Proguard extends Controller {
   def proguard(libraryName: String) = Action {
     val libraries = libraryName.split(',')
 
-    val availableLibs = listInDir(proguardFolder)
+    val availableLibs = listInDir(proguardFolderFix)
     val result = availableLibs.filter(libraries.contains).map(readFile).mkString
     Ok(title.format(libraryName, result))
   }
