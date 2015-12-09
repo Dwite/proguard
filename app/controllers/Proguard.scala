@@ -16,16 +16,16 @@ class Proguard extends Controller {
   val proguardFolder = "/public/proguards/"
   val proguardSuffix = "proguard-"
   val proguardExtension = ".pro"
+  val title = "# Created by https://www.proguard.io/api/%s\n\n%s"
 
   def proguard(libraryName: String) = Action {
     val libraries = libraryName.split(',')
-    if (libraries.length > 0) {
-      val resultProguard = s"\n# Created by https://www.proguard.io/api/$libraryName\n"
-      Ok(resultProguard + "\n" + (listInDir(proguardFolder).filter(libraries.contains(_)).map(readFile) mkString "\n"))
-    } else {
-      Ok(views.html.proguard(""))
-    }
+
+    val availableLibs = listInDir(proguardFolder)
+    val result = availableLibs.filter(libraries.contains).map(readFile).mkString
+    Ok(title.format(libraryName, result))
   }
+
 
   def list() = Action {
     Ok(Json.toJson(listInDir(proguardFolder)))
