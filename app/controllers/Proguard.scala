@@ -17,7 +17,7 @@ class Proguard extends Controller {
   val proguardSuffix = "proguard-"
   val proguardExtension = ".pro"
   val proguardList = "list.txt"
-  val title = "# Created by https://www.proguard.io/api/\n\n"
+  val title = "# Created by https://proguard.herokuapp.com/api/\n\n"
 
   def proguard(libraryName: String) = Action {
     val libraries = libraryName.split(',')
