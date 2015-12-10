@@ -9,21 +9,24 @@ import play.api.mvc.{Action, Controller}
 
 
 /**
-  * Created by dwite_000 on 09-Dec-15.
+  * Created by valery.kuznetsov on 09-Dec-15.
   */
 class Proguard extends Controller {
 
   val proguardFolder = "/public/proguards/"
-  val proguardFolderFix = "/public/proguards"
   val proguardSuffix = "proguard-"
   val proguardExtension = ".pro"
+  val proguardList = "list.txt"
   val title = "# Created by https://www.proguard.io/api/\n\n"
 
   def proguard(libraryName: String) = Action {
     val libraries = libraryName.split(',')
     var result = title
     for (el <- libraries) {
-      result = result + readFile(Play.resourceAsStream("public/proguards/" + proguardSuffix + el + proguardExtension).get)
+      val resourceStream = Play.resourceAsStream(proguardFolder + proguardSuffix + el + proguardExtension)
+      if (resourceStream.isDefined) {
+        result += readFile(resourceStream.get)
+      }
     }
     Ok(result)
   }
@@ -33,8 +36,11 @@ class Proguard extends Controller {
     Ok(Json.toJson(listInDir(proguardFolder)))
   }
 
-  private def listInDir(filePath: String): List[String] = {
-    getListOfFiles(Play.application.getFile(filePath)).map(_.getName.replace(proguardExtension, "").replace(proguardSuffix, ""))
+  private def listInDir(filePath: String): Array[String] = {
+    readFile(Play.resourceAsStream(proguardFolder + proguardList).get)
+      .split("\r\n")
+      .map(_.replace(proguardExtension, "")
+        .replace(proguardSuffix, ""))
   }
 
   def getListOfFiles(dir: File): List[File] = {
