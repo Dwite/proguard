@@ -1,6 +1,6 @@
 package controllers
 
-import java.io.File
+import java.io.{InputStream, File}
 
 import play.api.Play
 import play.api.Play.current
@@ -17,14 +17,15 @@ class Proguard extends Controller {
   val proguardFolderFix = "/public/proguards"
   val proguardSuffix = "proguard-"
   val proguardExtension = ".pro"
-  val title = "# Created by https://www.proguard.io/api/%s\n\n%s"
+  val title = "# Created by https://www.proguard.io/api/\n\n"
 
   def proguard(libraryName: String) = Action {
     val libraries = libraryName.split(',')
-
-    val availableLibs = listInDir(proguardFolderFix)
-    val result = availableLibs.filter(libraries.contains).map(readFile).mkString
-    Ok(title.format(libraryName, result))
+    var result = title
+    for (el <- libraries) {
+      result = result + readFile(Play.resourceAsStream("public/proguards/" + proguardSuffix + el + proguardExtension).get)
+    }
+    Ok(result)
   }
 
 
@@ -33,15 +34,15 @@ class Proguard extends Controller {
   }
 
   private def listInDir(filePath: String): List[String] = {
-    getListOfFiles(Play.getFile(filePath)).map(_.getName.replace(proguardExtension, "").replace(proguardSuffix, ""))
+    getListOfFiles(Play.application.getFile(filePath)).map(_.getName.replace(proguardExtension, "").replace(proguardSuffix, ""))
   }
 
   def getListOfFiles(dir: File): List[File] = {
     dir.listFiles.toList
   }
 
-  def readFile(string: String): String = {
-    val source = scala.io.Source.fromFile(Play.getFile(s"$proguardFolder$proguardSuffix$string$proguardExtension"))
+  def readFile(stream: InputStream): String = {
+    val source = scala.io.Source.fromInputStream(stream)
     val lines = try source.mkString finally source.close()
     lines
   }
