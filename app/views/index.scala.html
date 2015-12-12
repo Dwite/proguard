@@ -28,17 +28,25 @@
         <link rel="stylesheet" type="text/css" href="@routes.Assets.versioned("/stylesheets/select2.min.css")">
         <link rel="stylesheet" type="text/css" href="@routes.Assets.versioned("/stylesheets/app.css")">
         <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
-        <link href="@routes.Assets.versioned("/stylesheets/jquery.tagit.css")" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" type="text/css" href="@routes.Assets.versioned("/stylesheets/jquery.tagit.css")">
         <script type="text/javascript">
                 $(document).ready(function() {
 
                     var sampleTags = ['c++', 'java', 'php', 'coldfusion', 'javascript', 'asp', 'ruby', 'python', 'c', 'scala', 'groovy', 'haskell', 'perl', 'erlang', 'apl', 'cobol', 'go', 'lua'];
 
-                    $("#myTags").tagit(
+                    $("#singleFieldTags2").tagit(
                             availableTags: sampleTags,
                     );
                 });
         </script>
+
+        <script src="@routes.Assets.versioned("/javascripts/jquery.min.js")"></script>
+        <script src="@routes.Assets.versioned("/javascripts/jquery-ui.min.js")"></script>
+        <script src="@routes.Assets.versioned("/javascripts/bootstrap.min.js")"></script>
+        <script src="@routes.Assets.versioned("/javascripts/select2.full.min.js")"></script>
+        <script src="@routes.Assets.versioned("/javascripts/retina.min.js")"></script>
+        <script src="@routes.Assets.versioned("/javascripts/app.js")"></script>
+        <script src="@routes.Assets.versioned("/javascripts/tag-it.js")" type="text/javascript" charset="utf-8"></script>
     </head>
     <body>
         <div class="site-wrapper">
@@ -49,10 +57,9 @@
                         <div class="input-group">
                             <form>
                                 <p>
-                                    Vanilla example &mdash; the absolute minimum amount of code required, no configuration. No autocomplete, either. See the other examples for that.
+                                    If you instantiate Tag-it on an INPUT element, it will default to being singleField, with that INPUT element as the singleFieldNode. This is the simplest way to have a gracefully-degrading tag widget.
                                 </p>
-                                <ul id="myTags"></ul>
-                                <input type="submit" value="Submit">
+                                <input name="tags" id="singleFieldTags2" value="Apple, Orange">
                             </form>
                             <input id="ignoreSearch" type="text" tabindex="1" class="input form-control">
                             <div class="input-group-btn"><button type="button" onClick="generateGitIgnore()" class="btn btn-gitignore">Generate</button>
@@ -70,14 +77,6 @@
                 </div>
             </div>
         </div>
-
-        <script src="@routes.Assets.versioned("/javascripts/jquery.min.js")"></script>
-        <script src="@routes.Assets.versioned("/javascripts/jquery-ui.min.js")"></script>
-        <script src="@routes.Assets.versioned("/javascripts/bootstrap.min.js")"></script>
-        <script src="@routes.Assets.versioned("/javascripts/select2.full.min.js")"></script>
-        <script src="@routes.Assets.versioned("/javascripts/retina.min.js")"></script>
-        <script src="@routes.Assets.versioned("/javascripts/app.js")"></script>
-        <script src="@routes.Assets.versioned("/javascripts/tag-it.js")" type="text/javascript" charset="utf-8"></script>
     </body>
 </html>
 }
