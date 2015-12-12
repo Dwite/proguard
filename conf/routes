@@ -13,5 +13,3 @@ GET     /api/:libs                  controllers.Proguard.proguard(libs : String)
 
 # Proguard list of files
 GET     /api/list/                  controllers.Proguard.list()
-
-GET     /api/template/              controllers.Proguard.autocomplete()
