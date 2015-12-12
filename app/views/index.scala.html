@@ -27,6 +27,8 @@
         <link rel="stylesheet" type="text/css" href="@routes.Assets.versioned("/stylesheets/bootstrap.min.css")">
         <link rel="stylesheet" type="text/css" href="@routes.Assets.versioned("/stylesheets/select2.min.css")">
         <link rel="stylesheet" type="text/css" href="@routes.Assets.versioned("/stylesheets/app.css")">
+        <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
+        <link href="@routes.Assets.versioned("/stylesheets/jquery.tagit.css")" rel="stylesheet" type="text/css">
     </head>
     <body>
         <div class="site-wrapper">
@@ -34,7 +36,8 @@
                 <div class="cover-container">
                     <div class="inner cover"><img src="http://icons.iconarchive.com/icons/dtafalonso/android-lollipop/128/Settings-icon.png">
                         <p class="lead">Create useful .proguard files for your project</p>
-                        <div class="input-group"><input id="ignoreSearch" type="text" tabindex="1" class="input form-control"><div class="input-group-btn"><button type="button" onClick="generateGitIgnore()" class="btn btn-gitignore">Generate</button>
+                        <div class="input-group"><input id="ignoreSearch" type="text" tabindex="1" class="input form-control">
+                            <div class="input-group-btn"><button type="button" onClick="generateGitIgnore()" class="btn btn-gitignore">Generate</button>
                             <button type="button" data-toggle="dropdown" class="btn btn-gitignore dropdown-toggle">
                                 <span class="caret"></span>
                             </button><ul role="menu" class="dropdown-menu pull-right">
@@ -42,6 +45,22 @@
                                     <span class="icon-download">Download File</span></a></li></ul></div></div><ul class="nav masthead-nav"></ul></div>
                     <div class="mastfoot"><div class="inner">
                         <p class="lead">Hosting 60+ .proguard templates</p>
+                        <script type="text/javascript">
+                                $(document).ready(function() {
+
+                                    var sampleTags = ['c++', 'java', 'php', 'coldfusion', 'javascript', 'asp', 'ruby', 'python', 'c', 'scala', 'groovy', 'haskell', 'perl', 'erlang', 'apl', 'cobol', 'go', 'lua'];
+
+                                    $("#myTags").tagit(
+                                            availableTags: sampleTags,
+                                    );
+                                });
+                        </script>
+
+                        <ul id="myTags">
+                                <!-- Existing list items will be pre-added to the tags -->
+                            <li>Tag1</li>
+                            <li>Tag2</li>
+                        </ul>
                     </div>
                     </div>
                 </div>
@@ -54,6 +73,7 @@
         <script src="@routes.Assets.versioned("/javascripts/select2.full.min.js")"></script>
         <script src="@routes.Assets.versioned("/javascripts/retina.min.js")"></script>
         <script src="@routes.Assets.versioned("/javascripts/app.js")"></script>
+        <script src="@routes.Assets.versioned("/javascripts/tag-it.js")" type="text/javascript" charset="utf-8"></script>
     </body>
 </html>
 }
