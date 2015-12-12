@@ -54,9 +54,9 @@ function generateGitIgnore() {
     var searchString = $("#ignoreSearch").val();
     var searchLength = searchString.length;
     if (searchLength > 0) {
-        var files = searchString;
+        var files = searchString.slice(2);
         var uriEncodedFiles = encodeURIComponent(files);
-        window.location = "/api/" + uriEncodedFiles.slice(1);
+        window.location = "/api/" + uriEncodedFiles;
         $("#ignoreSearch").val("");
     }
 }
