@@ -24,7 +24,7 @@ class Proguard extends Controller {
     val result = libraries
       .map(el => Play.resourceAsStream(proguardFolder + proguardSuffix + el + proguardExtension))
       .filter(_.isDefined)
-      .map(el => readFile(el.get)) mkString
+      .map(el => readFile(el.get)) mkString "\n\n"
 
     Ok(title.format(result))
   }
