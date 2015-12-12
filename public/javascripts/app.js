@@ -1,5 +1,5 @@
 var data = [{
-    id: 'bug',
+    id: 'enhancement',
     text: 'enhancement'
 }, {
     id: 'bug',
@@ -56,7 +56,7 @@ function generateGitIgnore() {
     if (searchLength > 0) {
         var files = searchString;
         var uriEncodedFiles = encodeURIComponent(files);
-        window.location = "/api/" + uriEncodedFiles;
+        window.location = "/api/" + uriEncodedFiles.slice(1);
         $("#ignoreSearch").val("");
     }
 }
