@@ -1,17 +1,17 @@
 var data = [{
-    id: 0,
+    id: 'bug',
     text: 'enhancement'
 }, {
-    id: 1,
+    id: 'bug',
     text: 'bug'
 }, {
-    id: 2,
+    id: 'duplicate',
     text: 'duplicate'
 }, {
-    id: 3,
+    id: 'invalid',
     text: 'invalid'
 }, {
-    id: 4,
+    id: 'wontfix',
     text: 'wontfix'
 }];
 
@@ -29,7 +29,9 @@ $(document).ready(function() {
         multiple: true,
         minimumInputLength: 1,
         data: data
-    }); $("#ignoreSearch").select2("container").find("ul.select2-choices").sortable({
+    });
+
+    $("#ignoreSearch").select2("container").find("ul.select2-choices").sortable({
         containment: 'parent',
         start: function() {
             $("#ignoreSearch").select2("onSortStart");
@@ -38,7 +40,14 @@ $(document).ready(function() {
             $("#ignoreSearch").select2("onSortEnd");
         }
     });
-})
+
+    var sampleTags = ['c++', 'java', 'php', 'coldfusion', 'javascript', 'asp', 'ruby', 'python', 'c', 'scala', 'groovy', 'haskell', 'perl', 'erlang', 'apl', 'cobol', 'go', 'lua'];
+
+    $('#singleFieldTags2').tagit({
+        availableTags: sampleTags,
+        placeholderText : "test"
+    });
+});
 
 
 function generateGitIgnore() {
